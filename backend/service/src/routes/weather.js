@@ -5,3 +5,5 @@ const {weatherController} = require("../controllers/weathercontroller"); // Impo
     
 // Definisce la route POST per ottenere le informazioni meteo di una città.
 router.post("/weather", weatherController);
+
+module.exports = router;

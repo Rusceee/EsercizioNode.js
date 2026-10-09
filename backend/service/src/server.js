@@ -5,7 +5,8 @@ var port = 3000;                               // Definisce la porta del server.
 var bodyParser = require("body-parser");       // Importa il middleware per leggere il corpo delle richieste.
 var axios = require("axios");                  // Importa il client HTTP per chiamare l'API meteo.
 
-const pageroutes = require("./routes/pageroutes")                  // per gestire la parte di routing delle pagine statiche, importo il file pageroutes.js che contiene le route per le pagine statiche.
+const pageroutes = require("./routes/pageroutes");
+const weather = require("./routes/weather");            // per gestire la parte di routing delle pagine statiche, importo il file pageroutes.js che contiene le route per le pagine statiche.
 
 // il body parser serve per leggere i dati inviati dal form
 app.use(bodyParser.json());                    // Abilita la lettura del corpo in formato JSON.
@@ -75,7 +76,7 @@ app.post('/weather', async (req, res) =>{             // Definisce la route POST
 }); // Chiude la route POST /weather.
 */
 app.use("/", pageroutes); // Usa le route definite in pageroutes.js per tutte le richieste alla radice.
-
+app.use("/", weather);  // usa le route di weather
 //definizione dello stato visualizzabile da prompt
 app.listen(port, ()=> {                        // Avvia il server sulla porta definita.
 console.log("Server in ascolto alla porta " + port); // Scrive in console la porta di ascolto.
