@@ -17,21 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true })); // Abilita la lettura dei da
 app.use(express.static(path.join(__dirname, "../../../frontend/public"))); // Serve i file statici della cartella public.
 
 
-//pagina di signup
-
-//post per la registrazione, senza persistenza
- // Chiude la route POST /signup.
-
-
-
 app.use("/", pageroutes); // Usa le route definite in pageroutes.js per tutte le richieste alla radice.
 app.use("/", weather);  // usa le route di weather
 app.use("/", login);
 app.use("/", signup);
 //definizione dello stato visualizzabile da prompt
-app.listen(port, ()=> {                        // Avvia il server sulla porta definita.
-console.log("Server in ascolto alla porta " + port); // Scrive in console la porta di ascolto.
-console.log('accedi all indirizzo http://localhost:'+port) // Scrive in console l'indirizzo da aprire nel browser.
+app.listen(port, () => {                        // Avvia il server sulla porta definita.
+    console.log("Server in ascolto alla porta " + port); // Scrive in console la porta di ascolto.
+    console.log('accedi all indirizzo http://localhost:' + port) // Scrive in console l'indirizzo da aprire nel browser.
 }); // Chiude il metodo listen.
 
 

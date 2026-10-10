@@ -1,15 +1,24 @@
-   const fetch = require("node-fetch");
-   
-   exports.weatherController = async (req,res) => {
-                const city = req.body.city;                       // Estrae la città dal corpo della richiesta.
-                const apiKey = "c28acc12768cc42c658f08d6c9839b40"; // Chiave per l'API di OpenWeatherMap.
+const fetch = require("node-fetch");
 
-    try {                                             // Inizia un blocco try per gestire eventuali errori.
-        const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=it`
-        ); // Chiama l'API meteo di OpenWeatherMap.
 
-        const data = await response.json();
+const { validateCity } = require("../utils/validateCity"); // Importa la funzione di validazione della città
+const { getWeather } = require("../utils/apiClient"); // Importa la funzione per ottenere i dati meteo dall'API
+const { WEATHER_API_KEY } = require("../utils/constants"); // Importa la chiave API per l'API meteo
+const { normalizeWeather } = require("../utils/normalizeWeather"); // Importa la funzione per normalizzare i dati meteo
+const { logError } = require("../utils/logger"); // Importa la funzione per loggare gli errori
+
+exports.weatherController = async (req, res) => {
+    const city = req.body.city;                       // Estrae la città dal corpo della richiesta.
+
+    if (!validateCity(city)) {
+        return res.json({
+            error: true,
+            message: "Città non valida"
+        });
+    }
+
+    try {                                            
+        const data = await getWeather(city, WEATHER_API_KEY); // Chiama l'API meteo di OpenWeatherMap.
 
         if (data.cod !== 200) {                       // Controlla se la risposta è valida.
             return res.json({
@@ -18,22 +27,15 @@
             });
         }
 
-        res.json({
-            city: data.name,
-            description: data.weather[0].description,
-            icon: data.weather[0].icon,
-            temperature: data.main.temp,
-            humidity: data.main.humidity,
-            windSpeed: data.wind.speed
-        }); // Invia la risposta JSON al client con i dati meteo.
+        res.json(normalizeWeather(data)); // Invia la risposta JSON al client con i dati meteo.
 
-    } catch (error) {
-        console.error("Errore durante la richiesta meteo:", error.message);
+    } catch (err) {
+        logError(err);
         res.json({
             error: true,
-            message: "Errore nel recupero dei dati meteo"
+            message: "Errore nel server"
         });
     }
-    };
-    
+};
+
 // qua metto la logica di manipolazione dei dati
