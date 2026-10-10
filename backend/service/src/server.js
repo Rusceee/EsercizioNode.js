@@ -8,6 +8,7 @@ var axios = require("axios");                  // Importa il client HTTP per chi
 const pageroutes = require("./routes/pageroutes");
 const weather = require("./routes/weather");            // per gestire la parte di routing delle pagine statiche, importo il file pageroutes.js che contiene le route per le pagine statiche.
 const login = require("./routes/login");
+const signup = require("./routes/signup");
 // il body parser serve per leggere i dati inviati dal form
 app.use(bodyParser.json());                    // Abilita la lettura del corpo in formato JSON.
 app.use(bodyParser.urlencoded({ extended: true })); // Abilita la lettura dei dati inviati dai form HTML.
@@ -19,16 +20,14 @@ app.use(express.static(path.join(__dirname, "../../../frontend/public"))); // Se
 //pagina di signup
 
 //post per la registrazione, senza persistenza
-app.post('/signup', (req, res) =>{             // Definisce la route POST per elaborare la registrazione.
-    const{username, password} = req.body;      // Estrae username e password dal corpo della richiesta.
-    res.send('Registrazione completata per: ' + username); // Risponde confermando la registrazione.
-}); // Chiude la route POST /signup.
+ // Chiude la route POST /signup.
 
 
 
 app.use("/", pageroutes); // Usa le route definite in pageroutes.js per tutte le richieste alla radice.
 app.use("/", weather);  // usa le route di weather
 app.use("/", login);
+app.use("/", signup);
 //definizione dello stato visualizzabile da prompt
 app.listen(port, ()=> {                        // Avvia il server sulla porta definita.
 console.log("Server in ascolto alla porta " + port); // Scrive in console la porta di ascolto.
