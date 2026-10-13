@@ -9,9 +9,6 @@ const { logError } = require("../utils/logger"); // Importa la funzione per logg
 
 exports.weatherController = async (req, res) => {
     const city = req.body.city;                       // Estrae la città dal corpo della richiesta.
-
-        console.log("debug api key: " + WEATHER_API_KEY); // Stampa la chiave API per il debug
-        console.log("debug city: " + city); // Stampa la città per il debug
         
     if (!validateCity(city)) {
         return res.json({
