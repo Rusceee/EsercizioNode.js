@@ -2,9 +2,10 @@ var express = require("express");              // Importa il framework Express.
 var path = require("path");                    // Importa il modulo per gestire i percorsi dei file.
 var app = express();                           // Crea l'applicazione Express.
 var port = 3000;                               // Definisce la porta del server.
-require("dotenv").config();                  // Importa il modulo dotenv per leggere le variabili d'ambiente dal file .env.
+                  // Importa il modulo dotenv per leggere le variabili d'ambiente dal file .env.
 var bodyParser = require("body-parser");       // Importa il middleware per leggere il corpo delle richieste.
 var axios = require("axios");                  // Importa il client HTTP per chiamare l'API meteo.
+
 
 const pageroutes = require("./routes/pageroutes");
 const weather = require("./routes/weather");            // per gestire la parte di routing delle pagine statiche, importo il file pageroutes.js che contiene le route per le pagine statiche.

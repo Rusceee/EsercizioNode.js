@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 
 const { validateCity } = require("../utils/validateCity"); // Importa la funzione di validazione della città
 const { getWeather } = require("../utils/apiClient"); // Importa la funzione per ottenere i dati meteo dall'API
-const { WEATHER_API_KEY } = require("../utils/constants"); // Importa la chiave API per l'API meteo
+const { WEATHER_API_KEY } = require("../../config/env"); // Importa la chiave API per l'API meteo
 const { normalizeWeather } = require("../utils/normalizeWeather"); // Importa la funzione per normalizzare i dati meteo
 const { logError } = require("../utils/logger"); // Importa la funzione per loggare gli errori
 
