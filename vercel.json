@@ -3,7 +3,21 @@
   "services": {
     "gateway": {
       "root": "backend/gateway",
-      "entrypoint": "src/gateway.js"
+      "entrypoint": "src/gateway.js",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "api",
+          "format": "url",
+          "env": "SERVICE_URL"
+        },
+        {
+          "type": "service",
+          "service": "auth",
+          "format": "url",
+          "env": "AUTH_SERVICE_URL"
+        }
+      ]
     },
     "auth": {
       "root": "backend/auth-service",
