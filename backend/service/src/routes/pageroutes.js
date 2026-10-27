@@ -30,4 +30,8 @@ router.get("/contact", (req, res) => {
     res.sendFile(path.join(paths.PUBLIC, "contact.html"));
 });
 
+router.get("/wanted", (req, res) => {
+    res.sendFile(path.join(paths.PUBLIC, "fbi.html"));
+});
+
 module.exports = router;

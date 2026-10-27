@@ -1,3 +1,5 @@
+/*
+
 const express = require("express");
 
 const authRoutes = require ("./routes/authRoutes.js");
@@ -12,3 +14,5 @@ app.use("/", authRoutes);
 app.listen(PORT,() => {
     console.log("Auth Service avviato sulle porta ${PORT}");
 });
+
+*/
