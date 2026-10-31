@@ -34,4 +34,5 @@ router.get("/wanted", (req, res) => {
     res.sendFile(path.join(paths.PUBLIC, "fbi.html"));
 });
 
+
 module.exports = router;
